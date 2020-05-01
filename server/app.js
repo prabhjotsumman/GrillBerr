@@ -15,17 +15,17 @@ mongoose.connect(config.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopolo
     .then(() => console.log("Connected to database"))
     .catch((err) => console.log("Failed to connect database", err));
 
-app.post("/grill", async (req, res) => {
-    //req.body is undefined without body-parser: ref line 9,10
-    const grill = new Grills(req.body);
+// app.post("/grill", async (req, res) => {
+//     //req.body is undefined without body-parser: ref line 9,10
+//     const grill = new Grills(req.body);
 
-    try {
-        await grill.save();
-        res.send(grill);
-    } catch (err) {
-        res.status(500).send(err);
-    }
-});
+//     try {
+//         await grill.save();
+//         res.send(grill);
+//     } catch (err) {
+//         res.status(500).send(err);
+//     }
+// });
 
 app.use("/graphql",graphqlHTTP({
         schema,
