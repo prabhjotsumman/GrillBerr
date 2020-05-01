@@ -1,10 +1,8 @@
 const graphql = require('graphql');
 const _ = require('lodash');
-
 const GrillModel = require('../models/grills');
 
 const { GraphQLObjectType, GraphQLString, GraphQLSchema,GraphQLID, GraphQLList, GraphQLInt} = graphql;
-
 
 const Grill = new GraphQLObjectType({
     name:'Grill',
