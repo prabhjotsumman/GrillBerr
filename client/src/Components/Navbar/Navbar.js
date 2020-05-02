@@ -8,6 +8,8 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import { Link as RLink } from "react-router-dom";
 
+import {signOut } from '../../store/actions/authActions';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -24,8 +26,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const NavBar = () => {
+const NavBar = (props) => {
   const classes = useStyles();
+  const LoggedIn = props.firebase.auth.uid;
+  console.log(LoggedIn);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -33,11 +37,17 @@ const NavBar = () => {
           <Typography variant="h6" className={classes.title}>
             Grillber
           </Typography>
-          <RLink to="/signin" className={classes.link}>
-            <Button color="inherit" className={classes.button}>
-              Sign in
+          {!LoggedIn ? (
+            <RLink to="/signin" className={classes.link}>
+              <Button color="inherit" className={classes.button}>
+                Sign in
+              </Button>
+            </RLink>
+          ) : (
+            <Button color="inherit" className={classes.button} onClick={props.signOut}>
+              Sign Out
             </Button>
-          </RLink>
+          )}
         </Toolbar>
       </AppBar>
     </div>
@@ -45,7 +55,14 @@ const NavBar = () => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
-  return {};
+  console.log("NAVBAR:",state);
+  return state;
 };
-export default connect(mapStateToProps)(NavBar);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(signOut())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
