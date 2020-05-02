@@ -1,16 +1,15 @@
 import React from "react";
-import { makeStyles, Colors } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
+import { connect } from "react-redux";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
@@ -18,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavBar = () => {
-    const classes = useStyles();    
+  const classes = useStyles();
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -32,4 +31,11 @@ const NavBar = () => {
     </div>
   );
 };
-export default NavBar;
+
+const mapStateToProps = (state) =>{
+    console.log(state);
+    return {
+
+    }
+}
+export default connect(mapStateToProps)(NavBar);
