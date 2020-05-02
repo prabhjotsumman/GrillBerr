@@ -40,4 +40,27 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+  
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+  
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBay1FKM38K87X83hjz96mKpSfMq9W2KkA",
+      authDomain: "grillber-react.firebaseapp.com",
+      databaseURL: "https://grillber-react.firebaseio.com",
+      projectId: "grillber-react",
+      storageBucket: "grillber-react.appspot.com",
+      messagingSenderId: "106554603234",
+      appId: "1:106554603234:web:8d7b55465686e84ab090bb",
+      measurementId: "G-64EVYE61F8"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
 </html>
