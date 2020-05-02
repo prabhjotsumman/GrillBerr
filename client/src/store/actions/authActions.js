@@ -1,7 +1,8 @@
 import { LOGIN_FAILED, LOGIN_SUCCESS } from "../../constants/constants";
 
 export const signIn = (credentials) => {
-  return (dispatch, getState, { getFirebase }) => {
+  return (dispatch, getState,  getFirebase ) => {
+    console.log(credentials);
     const firebase = getFirebase();
 
     firebase
