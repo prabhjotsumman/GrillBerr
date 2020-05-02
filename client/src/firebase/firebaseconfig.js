@@ -1,3 +1,7 @@
+import firebase from 'firebase/app'
+// import 'firebase/firestore'
+import 'firebase/auth'
+
 const firebaseConfig = {
   apiKey: "AIzaSyBay1FKM38K87X83hjz96mKpSfMq9W2KkA",
   authDomain: "grillber-react.firebaseapp.com",
@@ -9,4 +13,17 @@ const firebaseConfig = {
   measurementId: "G-64EVYE61F8",
 };
 
-export default firebaseConfig;
+// const firebaseApp = firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+
+// const firebaseAppAuth = firebaseApp.auth();
+// const providers = {
+//   googleProvider: new firebase.auth.GoogleAuthProvider(),
+//   emailAuthProvider: new firebase.auth.EmailAuthProvider(),
+// };
+
+// firebase.firestore().settings({timestampsInSnapshots : true});
+
+// export default firebaseApp;
+// export default firebaseConfig;
+export default firebase;
