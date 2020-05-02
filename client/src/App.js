@@ -3,8 +3,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Homepage from "./Components/Homepage";
-import SignInSide from "./Components/login";
-import SignUpSide from "./Components/register";
+import AuthInterface from './Components/Auth/AuthInterface';
 
 // import withFirebaseAuth from "react-with-firebase-auth";
 // import * as firebase from "firebase/app";
@@ -18,7 +17,7 @@ import SignUpSide from "./Components/register";
 //   googleProvider: new firebase.auth.GoogleAuthProvider(),
 //   emailAuthProvider: new firebase.auth.EmailAuthProvider()
 // };
- 
+  
 class App extends Component {
   render() {
     // const { user, signOut, signInWithGoogle } = this.props;
@@ -26,8 +25,14 @@ class App extends Component {
     return (
       <Router>
         <Route exact path="/" component={Homepage} />
-        <Route path="/signin" component={SignInSide } />
-        <Route path="/signup" component={SignUpSide } />
+        <Route
+          path="/signin"
+          render={(props) => <AuthInterface {...props} mode="signin" />}
+        />
+        <Route
+          path="/signup"
+          render={(props) => <AuthInterface {...props} mode="signup" />}
+        />
       </Router>
     );
   }

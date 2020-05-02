@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 import { connect } from "react-redux";
+import { Link as RLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,6 +15,13 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  link:{
+      color: "#fff",
+      textDecoration :'none'
+  },
+  button:{
+      border: '1px solid #fff'
+  }
 }));
 
 const NavBar = () => {
@@ -25,17 +33,19 @@ const NavBar = () => {
           <Typography variant="h6" className={classes.title}>
             Grillber
           </Typography>
-          <Button color="inherit">Sign in</Button>
+          <RLink to="/signin" className={classes.link}>
+            <Button color="inherit" className={classes.button}>
+              Sign in
+            </Button>
+          </RLink>
         </Toolbar>
       </AppBar>
     </div>
   );
 };
 
-const mapStateToProps = (state) =>{
-    console.log(state);
-    return {
-
-    }
-}
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {};
+};
 export default connect(mapStateToProps)(NavBar);
