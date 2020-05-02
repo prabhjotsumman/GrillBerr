@@ -12,6 +12,9 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./store/reducers/rootReducer";
 
+import { useSelector } from "react-redux";
+import { isLoaded } from "react-redux-firebase";
+
 const store = createStore(
   rootReducer,
   compose(
@@ -26,6 +29,11 @@ const reduxFirebase = {
   enableLogging: true,
 };
 
+function AuthIsLoaded({ children }) {
+  const auth = useSelector((state) => state.firebase.auth);
+  if (!isLoaded(auth)) return <div><h3>Loading your Grillber Experience...</h3></div>;
+  return children;
+}
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider
@@ -34,7 +42,9 @@ ReactDOM.render(
       dispatch={store.dispatch}
     >
       <React.StrictMode>
-        <App />
+        <AuthIsLoaded>
+          <App />
+        </AuthIsLoaded>
       </React.StrictMode>
     </ReactReduxFirebaseProvider>
   </Provider>,

@@ -2,6 +2,8 @@ import {
   LOGIN_FAILED,
   LOGIN_SUCCESS,
   SIGNOUT_SUCCESS,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILED,
 } from "../../constants/constants";
 
 const initState = {};
@@ -21,8 +23,23 @@ const authReducer = (state = initState, action) => {
         authError: "LOGIN FAILED",
       };
 
-      case SIGNOUT_SUCCESS:
-        return state;
+    case SIGNOUT_SUCCESS:
+      return state;
+
+    case SIGNUP_SUCCESS:
+      console.log("SIGNUP_SUCCESS");
+      return {
+        ...state,
+        authError: null,
+      };
+
+    case SIGNUP_FAILED:
+      console.log("SIGNUP_FAILED");
+      return {
+        ...state,
+        authError: action.err.message,
+      };
+
     default:
       return state;
   }
