@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Homepage from "./Components/Homepage";
 import Profile from './Components/User/Profile/Profile';
 import AuthInterface from './Components/Auth/AuthInterface';
+import PDP from './Components/Product/PDP';
 
 // import withFirebaseAuth from "react-with-firebase-auth";
 // import * as firebase from "firebase/app";
@@ -34,6 +35,7 @@ class App extends Component {
           path="/signup"
           render={(props) => <AuthInterface {...props} mode="signup" />}
         />
+        <Route path="/bbq" component={PDP}/>
         <Route path="/profile" component={Profile}/>
       </Router>
     );

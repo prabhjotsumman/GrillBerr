@@ -5,7 +5,7 @@ import Navbar from './Navbar/Navbar';
 import Grid from '@material-ui/core/Grid'
 import Card from './MaterialUI/Card/Card';
 
-import Footer from './Footer';
+// import Footer from './Footer';
 
 
 class Homepage extends Component{
