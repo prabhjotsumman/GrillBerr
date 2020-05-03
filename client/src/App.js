@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Homepage from "./Components/Homepage";
+import Profile from './Components/User/Profile/Profile';
 import AuthInterface from './Components/Auth/AuthInterface';
 
 // import withFirebaseAuth from "react-with-firebase-auth";
@@ -33,6 +34,7 @@ class App extends Component {
           path="/signup"
           render={(props) => <AuthInterface {...props} mode="signup" />}
         />
+        <Route path="/profile" component={Profile}/>
       </Router>
     );
   }
