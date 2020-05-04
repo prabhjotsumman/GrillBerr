@@ -6,6 +6,8 @@ import Typography from "@material-ui/core/Typography";
 
 import RentForm from "./PDPrentForm";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
+
 const styles = {
   root: {
     maxWidth: 345,
@@ -98,9 +100,11 @@ class PDP extends Component {
               </Typography>
               <RentForm />
               <div style={{ textAlign: "center", marginTop: "10px" }}>
-                <Button variant="outlined" color="primary">
-                  Rent it Now!
-                </Button>
+                <Link to="/checkout" className={styles.link}>
+                  <Button variant="outlined" color="primary">
+                    Rent it Now!
+                  </Button>
+                </Link>
               </div>
               {/* </Paper> */}
             </div>

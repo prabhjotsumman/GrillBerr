@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Navbar from "../../Navbar/Navbar";
+import Orders from "./Orders";
 
 class Profile extends Component{
 
@@ -12,12 +13,14 @@ class Profile extends Component{
     }
 
     render(){
+        console.log("Profile page")
         return(
             <>
             <Navbar/>
             <div>
-                <h3>User Profile Page</h3>
+                <h3>User Profile Page!</h3>
             </div>
+            <Orders/> 
             </>
         )
     }
