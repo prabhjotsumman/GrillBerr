@@ -22,7 +22,7 @@ class AuthInterface extends Component {
     this.props.signUp(newUser);
   };
   render() {
-    const { authError } = this.props;
+    // const { authError } = this.props;
     console.log("AUTH_I : ", this.props);
     return this.props.isLoggedIn ? (
       <Redirect to="/" />

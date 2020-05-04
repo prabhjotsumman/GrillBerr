@@ -24,7 +24,7 @@ export default function DateAndTimePickers() {
         id="datetime-local"
         label="From Date"
         type="datetime-local"
-        defaultValue="2017-05-24T10:30"
+        defaultValue="2020-05-10T10:30"
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
@@ -34,7 +34,7 @@ export default function DateAndTimePickers() {
         id="datetime-local"
         label="To Date"
         type="datetime-local"
-        defaultValue="2017-05-24T10:30"
+        defaultValue="2020-05-12T11:00"
         className={classes.textField}
         InputLabelProps={{
           shrink: true,
