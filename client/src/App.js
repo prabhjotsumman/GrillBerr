@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import SignInSide from "./Components/login";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Homepage from "./Components/Homepage";
+import Homepage from "./Components/Homepage/Homepage";
 import Profile from './Components/User/Profile/Profile';
 import AuthInterface from './Components/Auth/AuthInterface';
 import PDP from './Components/Product/PDP';

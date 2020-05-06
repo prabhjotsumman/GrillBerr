@@ -48,7 +48,7 @@ export default function CartItemListView() {
     //   spacing={2}
       className={classes.root}
     >
-      {/* <CssBaseline /> */}
+      <CssBaseline />
       <div className={classes.paper}>
         <Typography
           variant="h5"

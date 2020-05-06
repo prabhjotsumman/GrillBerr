@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
-import Navbar from './Navbar/Navbar';
+import Navbar from '../Navbar/Navbar';
 
 import Grid from '@material-ui/core/Grid'
-import Card from './MaterialUI/Card/Card';
-
-// import Footer from './Footer';
+import Card from '../MaterialUI/Card/Card';
+import Banner from './Banner';
+import Footer from './Footer';
 
 
 class Homepage extends Component{
@@ -13,9 +13,10 @@ class Homepage extends Component{
         return (
           <>
             <Navbar />
+            <Banner/>
             <h1 style={{ textAlign: "center" }}>
               {" "}
-              Grillber - Book Your BBQ now!
+              
             </h1>
             <Grid
               container
@@ -51,7 +52,7 @@ class Homepage extends Component{
                 <Card />
               </Grid>
             </Grid>
-            {/* <Footer/> */}
+            <Footer/>
           </>
         );
     }
