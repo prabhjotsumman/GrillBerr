@@ -6,7 +6,7 @@ import Homepage from "./Components/Homepage";
 import Profile from './Components/User/Profile/Profile';
 import AuthInterface from './Components/Auth/AuthInterface';
 import PDP from './Components/Product/PDP';
-import Checkout from './Components/User/Profile/Checkout';
+import Checkout from './Components/User/Profile/Checkout/Checkout';
 
 // import withFirebaseAuth from "react-with-firebase-auth";
 // import * as firebase from "firebase/app";
