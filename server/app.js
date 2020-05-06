@@ -3,13 +3,14 @@ var bodyParser = require("body-parser");
 const graphqlHTTP = require("express-graphql");
 const schema = require("./schema/schema");
 const mongoose = require("mongoose");
-
+const cors = require("cors");
 const config = require("./config");
 
 const app = express();
 //Body Parser is required to access the JSON data directly to res.body
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 mongoose.connect(config.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connected to database"))

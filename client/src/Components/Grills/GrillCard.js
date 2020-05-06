@@ -8,6 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
@@ -21,9 +22,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard() {
+export default function GrillCard(props) {
   const classes = useStyles();
-
+  const {grill} = props;
   return (
     <Card className={classes.root} variant="outlined">
       <CardActionArea>
@@ -34,13 +35,13 @@ export default function MediaCard() {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Heavy BBQ 585
+            {grill.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            BBQ, best for small events and for picnic
+            {grill.description}
           </Typography>
           <Typography variant="h3" color="textSecondary" component="p" className="right">
-            $55
+            {grill.price}
           </Typography>
         </CardContent>
       </CardActionArea>

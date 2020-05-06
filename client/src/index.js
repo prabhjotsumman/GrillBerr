@@ -15,6 +15,9 @@ import rootReducer from "./store/reducers/rootReducer";
 import { useSelector } from "react-redux";
 import { isLoaded } from "react-redux-firebase";
 
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "@apollo/react-hooks";
+
 const store = createStore(
   rootReducer,
   compose(
@@ -23,6 +26,9 @@ const store = createStore(
   )
 );
 
+const client = new ApolloClient({
+  uri: "http://localhost:4001/graphql",
+});
 const reduxFirebase = {
   // userProfile: "users",
   // useFirestoreForProfile: true,
@@ -35,6 +41,7 @@ function AuthIsLoaded({ children }) {
   return children;
 }
 ReactDOM.render(
+  <ApolloProvider client={client}>
   <Provider store={store}>
     <ReactReduxFirebaseProvider
       firebase={firebase}
@@ -47,7 +54,8 @@ ReactDOM.render(
         </AuthIsLoaded>
       </React.StrictMode>
     </ReactReduxFirebaseProvider>
-  </Provider>,
+  </Provider>
+  </ApolloProvider>,
   document.getElementById("root")
 );
 
