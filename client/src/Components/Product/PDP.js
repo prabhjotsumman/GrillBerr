@@ -9,6 +9,7 @@ import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {getCurrentGrill} from "../../store/actions/grillActions";
+import { addToCart } from "../../store/actions/cartActions";
 
 const styles = {
   root: {
@@ -42,21 +43,22 @@ const styles = {
   details: {
     padding: "5px",
   },
+  buttons:{
+    margin: '0px 10px'
+  }
 };
 
 class PDP extends Component {
-  constructor() {
-    super();
-    this.state = {
-      grill: null,
-    };
-  }
-
   componentDidMount(){
     this.props.getCurrentGrill();
   }
 
+  // const pushToCart =(data)=>{
+  //   console.log("push:",data);
+  // }
+  
   render() {
+    console.log("PDP Props: ",this.props);
     let currentGrill = this.props.currentGrill || {};
     const grillImg =
       "https://cdn.shopify.com/s/files/1/1205/3574/products/gas-bbq-grill-rentuu-1479788757021_320x.jpg?v=1534508821";
@@ -113,12 +115,17 @@ class PDP extends Component {
                 ${currentGrill.price}
               </Typography>
               <RentForm />
-              <div style={{ textAlign: "center", marginTop: "10px" }}>
-                <Link to="/checkout" className={styles.link}>
-                  <Button variant="outlined" color="primary">
+              <div style={{ marginTop: "10px" }}>
+                <Link to="/checkout" style={styles.link}>
+                  <Button variant="outlined" color="primary" style={styles.buttons} >
                     Rent it Now!
                   </Button>
                 </Link>
+                {/* <Link to="/checkout" style={styles.link}> */}
+                  <Button variant="outlined" color="secondary" style={styles.buttons} onClick={()=>this.props.addToCart(currentGrill)}>
+                    Add to Cart
+                  </Button>
+                {/* </Link> */}
               </div>
             </div>
           </Grid>
@@ -136,7 +143,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCurrentGrill : () => dispatch(getCurrentGrill())
+    getCurrentGrill : () => dispatch(getCurrentGrill()),
+    addToCart: (data) => dispatch(addToCart(data))
   };
 };
 
