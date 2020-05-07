@@ -31,7 +31,7 @@ const NavBar = (props) => {
   const classes = useStyles();
   const LoggedIn = props.firebase.auth.uid;
   const location = useLocation();
-  console.log(LoggedIn);
+  // console.log(LoggedIn);
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -67,7 +67,7 @@ const NavBar = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log("NAVBAR:",state);
+  // console.log("NAVBAR:",state);
   return state;
 };
 

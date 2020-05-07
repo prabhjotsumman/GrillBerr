@@ -7,6 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import RentForm from "./PDPrentForm";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import {getCurrentGrill} from "../../store/actions/grillActions";
 
 const styles = {
   root: {
@@ -43,7 +45,19 @@ const styles = {
 };
 
 class PDP extends Component {
+  constructor() {
+    super();
+    this.state = {
+      grill: null,
+    };
+  }
+
+  componentDidMount(){
+    this.props.getCurrentGrill();
+  }
+
   render() {
+    let currentGrill = this.props.currentGrill || {};
     const grillImg =
       "https://cdn.shopify.com/s/files/1/1205/3574/products/gas-bbq-grill-rentuu-1479788757021_320x.jpg?v=1534508821";
     return (
@@ -67,7 +81,7 @@ class PDP extends Component {
             {/* <Paper elevation={3}> */}
             <div style={styles.details}>
               <Typography gutterBottom variant="h5" component="h2">
-                Heavy BBQ 585
+                {currentGrill.name}
               </Typography>
               <Typography variant="body2" color="textPrimary" component="p">
                 <img
@@ -96,7 +110,7 @@ class PDP extends Component {
                 color="textPrimary"
                 className="right"
               >
-                $55
+                ${currentGrill.price}
               </Typography>
               <RentForm />
               <div style={{ textAlign: "center", marginTop: "10px" }}>
@@ -106,7 +120,6 @@ class PDP extends Component {
                   </Button>
                 </Link>
               </div>
-              {/* </Paper> */}
             </div>
           </Grid>
         </Grid>
@@ -115,4 +128,16 @@ class PDP extends Component {
   }
 }
 
-export default PDP;
+const mapStateToProps = (state) => {
+  return {
+    currentGrill: state.grill.grill,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCurrentGrill : () => dispatch(getCurrentGrill())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PDP);

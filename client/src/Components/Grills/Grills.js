@@ -1,12 +1,10 @@
 import React from "react";
-// import { Link } from 'react-router-dom';
-// import Navbar from "../Navbar/Navbar";
 
 import { Grid, makeStyles } from "@material-ui/core";
-import GrillCard from "./GrillCard";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
 import { CircularProgress, Typography } from "@material-ui/core";
+import GrillCard from "./GrillCard";
 
 const getGrillQuery = gql`
   {
@@ -29,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Grills() {
   const classes = useStyles();
   const { loading, error, data } = useQuery(getGrillQuery);
-  //   const {  data } = useQuery(getGrillQuery);
   console.log("DATA: ", data);
 
   let grills = {};
@@ -43,10 +40,6 @@ export default function Grills() {
       );
     });
   }
-  //   let grillContainer = [];
-  //   while (grills.length) {
-  //     grillContainer.push(grills.splice(0, 3));
-  //   }
 
   return (
     <div className={classes.root}>

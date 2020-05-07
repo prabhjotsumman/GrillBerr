@@ -36,9 +36,12 @@ class App extends Component {
           path="/signup"
           render={(props) => <AuthInterface {...props} mode="signup" />}
         />
-        <Route path="/bbq" component={PDP}/>
-        <Route path="/checkout" component={Checkout}/>
-        <Route path="/profile" component={Profile}/>
+        <Route
+          path="/bbq"
+          render={(props) => <PDP {...props}/>}
+        />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/profile" component={Profile} />
       </Router>
     );
   }
