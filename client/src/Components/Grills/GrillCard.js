@@ -14,7 +14,8 @@ import {setCurrentGrill} from "../../store/actions/grillActions";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 270,
+    minWidth: 240
   },
   media: {
     height: 140,
@@ -23,20 +24,31 @@ const useStyles = makeStyles({
     color: "#fff",
     textDecoration: "none",
   },
+  button: {
+    // backgroundColor: "#000",
+    color: "#ffb100",
+  },
+  buttonContainer: {
+    justifyContent: "center",
+    backgroundColor: "#000",
+  },
+  cardContent: {
+    border: "1px solid #c1c1c18c",
+  },
 });
 
 function GrillCard(props) {
   const classes = useStyles();
   const { grill } = props;
   return (
-    <Card className={classes.root} variant="outlined">
+    <Card className={classes.root} variant="outlined" elevation="2">
       <CardActionArea>
         <CardMedia
           className={classes.media}
           image="https://divinegrill.com/wp-content/uploads/2017/05/Blackstone-3-in-1-Kabob-Charcoal-Grill-Review.jpg"
           title="Contemplative Reptile"
         />
-        <CardContent>
+        <CardContent className={classes.cardContent}>
           <Typography gutterBottom variant="h5" component="h2">
             {grill.name}
           </Typography>
@@ -45,22 +57,22 @@ function GrillCard(props) {
           </Typography>
           <Typography
             variant="h3"
-            color="textSecondary"
+            color="initial"
             component="p"
             className="right"
           >
-            {grill.price}
+            ${grill.price}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions className={classes.buttonContainer}>
         <Link
           to={{ pathname: "/bbq", pdpProps: grill }}
           className={classes.link}
         >
           <Button
             size="small"
-            color="primary"
+            className={classes.button}
             onClick={() => props.setCurrentGrill(grill)}
           >
             Rent it

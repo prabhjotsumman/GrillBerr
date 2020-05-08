@@ -34,7 +34,7 @@ export default function Grills() {
   if (data) {
     grills = data.grills.map((grill, index) => {
       return (
-        <Grid key={grill.id} item xs={6} sm={4} md={3}>
+        <Grid key={grill.id} item xs={7} sm={6} md={3}>
           <GrillCard grill={grill}></GrillCard>
         </Grid>
       );
