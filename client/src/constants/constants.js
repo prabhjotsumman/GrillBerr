@@ -9,6 +9,7 @@ export const SIGNUP_FAILED = "SIGNUP_FAILED";
 export const ADD_TO_CART = "ADD_TO_CART"
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const GET_CART_ITEMS = "GET_CART_ITEMS";
+export const GET_CART_STATUS = "GET_CART_STATUS";
 
 export const GET_CURRENT_GRILL = "GET_CURRENT_GRILL";
 export const SET_CURRENT_GRILL = "SET_CURRENT_GRILL";

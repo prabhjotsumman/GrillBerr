@@ -9,7 +9,7 @@ import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {getCurrentGrill} from "../../store/actions/grillActions";
-import { addToCart } from "../../store/actions/cartActions";
+import { addToCart, removeFromCart, getCartStatus } from "../../store/actions/cartActions";
 
 const styles = {
   root: {
@@ -49,17 +49,42 @@ const styles = {
 };
 
 class PDP extends Component {
+  constructor(){
+    super();
+      this.state ={
+        status : "INTIAL",
+        currentGrill: null
+      }
+  }
   componentDidMount(){
     this.props.getCurrentGrill();
+    if(this.state.currentGrill){
+        this.props.getCartStatus(this.state.currentGrill);
+    }
   }
 
-  // const pushToCart =(data)=>{
-  //   console.log("push:",data);
-  // }
-  
+  handleCart = (data,whatToDo) =>{
+    console.log(data);
+    switch(whatToDo){
+      case "add":
+        this.props.addToCart(data);
+        this.setState({ status: "ADDED" });
+        break;
+      case "remove":
+        this.props.removeFromCart(data);
+        this.setState({status: "REMOVED"})
+        break;
+      default:
+        break;
+    }
+  }
   render() {
     console.log("PDP Props: ",this.props);
+    console.log("PDP state: ",this.state);
     let currentGrill = this.props.currentGrill || {};
+    if(currentGrill.id){
+      // this.props.getCartStatus(currentGrill);
+    } 
     const grillImg =
       "https://cdn.shopify.com/s/files/1/1205/3574/products/gas-bbq-grill-rentuu-1479788757021_320x.jpg?v=1534508821";
     return (
@@ -116,16 +141,51 @@ class PDP extends Component {
               </Typography>
               <RentForm />
               <div style={{ marginTop: "10px" }}>
-                <Link to="/checkout" style={styles.link}>
-                  <Button variant="outlined" color="primary" style={styles.buttons} >
-                    Rent it Now!
-                  </Button>
-                </Link>
-                {/* <Link to="/checkout" style={styles.link}> */}
-                  <Button variant="outlined" color="secondary" style={styles.buttons} onClick={()=>this.props.addToCart(currentGrill)}>
-                    Add to Cart
-                  </Button>
-                {/* </Link> */}
+                {(
+                  this.props.status === "INTIAL" ||
+                  this.state.status === "REMOVED"
+                ) ? (
+                  <>
+                    <Link to="/checkout" style={styles.link}>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        style={styles.buttons}
+                      >
+                        Rent it Now!
+                      </Button>
+                    </Link>
+
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      style={styles.buttons}
+                      onClick={() => this.handleCart(currentGrill, "add")}
+                    >
+                      Add to Cart
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      style={styles.buttons}
+                      disabled
+                      // onClick={() => this.handleCart(currentGrill)}
+                    >
+                      Added
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      style={styles.buttons}
+                      onClick={() => this.handleCart(currentGrill, "remove")}
+                    >
+                      Remove from Cart
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </Grid>
@@ -136,15 +196,22 @@ class PDP extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
     currentGrill: state.grill.grill,
+    itemsInCart:
+      (state.cart && state.cart.cart && state.cart.cart.itemsInCart) || {},
+    status:
+      (state.cart && state.cart.cart && state.cart.cart.status) || "INTIAL",
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCurrentGrill : () => dispatch(getCurrentGrill()),
-    addToCart: (data) => dispatch(addToCart(data))
+    getCurrentGrill: () => dispatch(getCurrentGrill()),
+    addToCart: (data) => dispatch(addToCart(data)),
+    removeFromCart: (data) => dispatch(removeFromCart(data)),
+    getCartStatus: (data) => dispatch(getCartStatus(data))
   };
 };
 
