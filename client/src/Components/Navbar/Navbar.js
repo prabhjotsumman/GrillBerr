@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { Link as RLink, useLocation } from "react-router-dom";
 
 import {signOut } from '../../store/actions/authActions';
+// import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     color: "#ffb100",
+    textDecoration: "none",
     fontFamily: "'Satisfy', 'cursive'",
   },
   link: {
-    color: "#fff",
     textDecoration: "none",
   },
   button: {
@@ -67,9 +68,11 @@ const NavBar = (props) => {
           >
             <OutdoorGrillIcon fontSize="large" className={classes.icon}/>
           </IconButton> */}
-          <Typography variant="h4" className={classes.title}>
-            Grillber
-          </Typography>
+          {/* <RLink to="/" clasName={classes.link}>  */}
+            <Typography variant="h4" className={classes.title}>
+              Grillber
+            </Typography>
+          {/* </RLink> */}
           {!LoggedIn ? (
             <RLink to="/signin" className={classes.link}>
               <Button color="inherit" className={classes.button}>

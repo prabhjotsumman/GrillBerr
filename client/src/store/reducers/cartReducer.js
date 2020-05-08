@@ -32,6 +32,7 @@ const cartReducer = (state = initState, action) => {
     case REMOVE_FROM_CART:
       cart = JSON.parse(localStorage.getItem("itemsInCart")) || [];
       cart = cart.filter((item) => item.id !== action.payload.id);
+      localStorage.setItem("itemsInCart", JSON.stringify(cart));
       return {
         ...state,
         cart: {itemsInCart : cart, status: 'REMOVED'},

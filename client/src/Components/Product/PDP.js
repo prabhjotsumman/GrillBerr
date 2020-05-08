@@ -58,6 +58,7 @@ class PDP extends Component {
   }
   componentDidMount(){
     this.props.getCurrentGrill();
+    this.setState({currentGrill:this.props.currentGrill});
     if(this.state.currentGrill){
         this.props.getCartStatus(this.state.currentGrill);
     }

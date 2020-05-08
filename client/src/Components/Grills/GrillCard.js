@@ -41,7 +41,7 @@ function GrillCard(props) {
   const classes = useStyles();
   const { grill } = props;
   return (
-    <Card className={classes.root} variant="outlined" elevation="2">
+    <Card className={classes.root} variant="outlined">
       <CardActionArea>
         <CardMedia
           className={classes.media}
