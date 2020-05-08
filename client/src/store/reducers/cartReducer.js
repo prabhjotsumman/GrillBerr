@@ -12,7 +12,7 @@ const cartReducer = (state = initState, action) => {
   switch (action.type) {
     case GET_CART_STATUS:
       cart = JSON.parse(localStorage.getItem("itemsInCart")) || [];
-      const presentInCart = cart.find((item)=> item.id == action.payload.id);  
+      const presentInCart = cart.find((item)=> item.id === action.payload.id);  
       const status = (presentInCart) ? "ADDED" : "REMOVED"
       return {
           ...state,

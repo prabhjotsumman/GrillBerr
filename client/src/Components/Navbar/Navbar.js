@@ -4,7 +4,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-
 import { connect } from "react-redux";
 import { Link as RLink, useLocation } from "react-router-dom";
 
@@ -14,17 +13,41 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  appbar: {
+    backgroundColor: "black",
+  },
   title: {
     flexGrow: 1,
+    color: "#ffb100",
+    fontFamily: "'Satisfy', 'cursive'",
   },
-  link:{
-      color: "#fff",
-      textDecoration :'none'
+  link: {
+    color: "#fff",
+    textDecoration: "none",
   },
-  button:{
-      border: '1px solid #fff',
-      marginLeft: '5px',
-  }
+  button: {
+    border: "1px solid #ffb100",
+    color: "#ffb100",
+    marginLeft: "5px",
+    "&:hover": {
+      backgroundColor: "#ffb100",
+      borderColor: "#ffb100",
+      color: "#000",
+      boxShadow: "none",
+    },
+    "&:active": {
+      boxShadow: "none",
+      backgroundColor: "#ffb100",
+      color: "fff",
+      borderColor: "#ffb100",
+    },
+    "&:focus": {
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
+    },
+  },
+  icon: {
+    color: "#ffb100",
+  },
 }));
 
 const NavBar = (props) => {
@@ -34,9 +57,17 @@ const NavBar = (props) => {
   // console.log(LoggedIn);
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="sticky" color="transparent" className={classes.appbar}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          {/* <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <OutdoorGrillIcon fontSize="large" className={classes.icon}/>
+          </IconButton> */}
+          <Typography variant="h4" className={classes.title}>
             Grillber
           </Typography>
           {!LoggedIn ? (
@@ -47,17 +78,22 @@ const NavBar = (props) => {
             </RLink>
           ) : (
             <>
-                <Button color="inherit" className={classes.button} onClick={props.signOut}>
-                    Sign Out
-                </Button>
-                {
-                    location.pathname !== '/profile' ?
-                    <RLink to="/profile" className={classes.link}>
-                        <Button color="inherit" className={classes.button}>
-                            Profile
-                        </Button>
-                    </RLink> : ""
-                }
+              <Button
+                color="inherit"
+                className={classes.button}
+                onClick={props.signOut}
+              >
+                Sign Out
+              </Button>
+              {location.pathname !== "/profile" ? (
+                <RLink to="/profile" className={classes.link}>
+                  <Button color="inherit" className={classes.button}>
+                    Profile
+                  </Button>
+                </RLink>
+              ) : (
+                ""
+              )}
             </>
           )}
         </Toolbar>

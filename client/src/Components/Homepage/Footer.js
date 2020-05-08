@@ -7,10 +7,10 @@ import Link from "@material-ui/core/Link";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary">
+    <Typography variant="body2" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="">
+        Site Developed by Grillber Developers
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -29,12 +29,13 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   footer: {
-    padding: theme.spacing(3, 2),
+    padding: theme.spacing(3, 3),
     marginTop: "20px",
-    backgroundColor: "black", color:'white'
-      // theme.palette.type === "light"
-      //   ? theme.palette.grey[200]
-      //   : theme.palette.grey[800],
+    backgroundColor: "black",
+    color: "#ffb100",
+    // theme.palette.type === "light"
+    //   ? theme.palette.grey[200]
+    //   : theme.palette.grey[800],
   },
 }));
 
@@ -46,10 +47,10 @@ export default function StickyFooter() {
       <CssBaseline />
       <footer className={classes.footer}>
         <Container maxWidth="sm">
-          <Typography variant="body1" align="center">
+          {/* <Typography variant="body1" align="center">
             Site Developed by Grillber Developers
-          </Typography>
-          <Copyright />
+          </Typography> */}
+          <Copyright className={classes.footer}/>
         </Container>
       </footer>
     </div>
