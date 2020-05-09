@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-import { Link as RLink, useLocation } from "react-router-dom";
+import { Link as RLink } from "react-router-dom";
 
 import {signOut } from '../../store/actions/authActions';
 // import { Link } from "react-router-dom";
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (props) => {
   const classes = useStyles();
   const LoggedIn = props.firebase.auth.uid;
-  const location = useLocation();
+  // const location = useLocation();
   // console.log(LoggedIn);
   return (
     <div className={classes.root}>
@@ -88,7 +88,7 @@ const NavBar = (props) => {
               >
                 Sign Out
               </Button>
-              {location.pathname !== "/profile" ? (
+              {/* {location && location.pathname !== "/profile" ? (
                 <RLink to="/profile" className={classes.link}>
                   <Button color="inherit" className={classes.button}>
                     Profile
@@ -96,7 +96,7 @@ const NavBar = (props) => {
                 </RLink>
               ) : (
                 ""
-              )}
+              )} */}
             </>
           )}
         </Toolbar>

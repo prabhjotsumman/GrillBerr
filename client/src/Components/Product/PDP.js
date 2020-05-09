@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Navbar from "../Navbar/Navbar";
 import Grid from "@material-ui/core/Grid";
 import StarIcon from "@material-ui/icons/Star";
 import Typography from "@material-ui/core/Typography";
@@ -89,7 +88,7 @@ class PDP extends Component {
     const grillImg =
       "https://cdn.shopify.com/s/files/1/1205/3574/products/gas-bbq-grill-rentuu-1479788757021_320x.jpg?v=1534508821";
     return (
-      <div style={{ flexGrow: 1, padding: "0px", overflow: "hidden" }}>
+      <div style={{ flexGrow: 1, padding: "0px", overflow: "hidden", height:"81vh" }}>
         <Grid
           container
           direction="row"
@@ -97,9 +96,6 @@ class PDP extends Component {
           alignItems="center"
           spacing={3}
         >
-          <Grid item xs={12} md={12} sm={12}>
-            <Navbar />
-          </Grid>
           <Grid item xs={8} sm={5} md={5}>
             {/* <Paper elevation={3} >  */}
             <img src={grillImg} alt="grill img" style={styles.image} />
@@ -166,15 +162,6 @@ class PDP extends Component {
                   </>
                 ) : (
                   <>
-                    {/* <Button
-                      variant="contained"
-                      color="secondary"
-                      style={styles.buttons}
-                      disabled
-                      // onClick={() => this.handleCart(currentGrill)}
-                    >
-                      Added
-                    </Button> */}
                     <Button
                       variant="outlined"
                       color="secondary"
@@ -183,7 +170,7 @@ class PDP extends Component {
                     >
                       Remove from Cart
                     </Button>
-                    <Link to="/checkout" style={styles.link}>
+                    <Link to="/confirmcheckout" style={styles.link}>
                       <Button
                         variant="outlined"
                         color="primary"

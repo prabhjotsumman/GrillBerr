@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CheckoutForm from "./CheckoutForm";
-import CartItemListView from "./CartItemsListView";
+// import CartItemListView from "./CartItemsListView";
 import { Grid, CssBaseline } from "@material-ui/core";
 
 const styles = {
@@ -22,13 +22,13 @@ class Orders extends Component {
       <>
         <div style={styles.container}>
           <CssBaseline />
-          <Grid container direction="row" justify="space-evenly">
+          <Grid container direction="row" justify="center">
             <Grid item xs={12} sm={7}>
               <CheckoutForm />
             </Grid>
-            <Grid item sm={3} xs={12}>
+            {/* <Grid item sm={3} xs={12}>
               <CartItemListView />
-            </Grid>
+            </Grid> */}
           </Grid>
         </div>
       </>
