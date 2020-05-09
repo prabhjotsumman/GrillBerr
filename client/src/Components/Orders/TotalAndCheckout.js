@@ -68,7 +68,7 @@ const GreenCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-export function TotalAndCheckout() {
+export function TotalAndCheckout(props) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -85,7 +85,7 @@ export function TotalAndCheckout() {
         </Grid>
         <Grid item>
           <Typography variant="h5" component="p" className={classes.price}>
-            $379.68
+            ${props.totalAmount}
           </Typography>
         </Grid>
         <Grid item className={classes.text}>

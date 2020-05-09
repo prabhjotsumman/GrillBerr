@@ -12,13 +12,15 @@ const useStyles = makeStyles((theme) => ({
   orderCardContainer: {
     margin: theme.spacing(0),
     maxWidth: "600px",
+    minHeight: "550px",
     maxHeight: '562px',
-    overflowY: 'scroll'
+    overflowY: 'scroll',
+    backgroundColor: "#fff"
   },
 }));
 
 export function ConfirmOrdersLayout(props) {
-  const { cartItems } = props;
+  const { cartItems, totalAmount } = props;
   const classes = useStyles();
   return (
     <div className={classes.layoutRoot}>
@@ -31,7 +33,7 @@ export function ConfirmOrdersLayout(props) {
             : ""}
         </Grid>
         <Grid item sm={5} md={4}>
-          <TotalAndCheckout />
+          <TotalAndCheckout totalAmount={totalAmount}/>
         </Grid>
       </Grid>
     </div>

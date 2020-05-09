@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-// import { makeStyles, Grid } from "@material-ui/core";
-// import Footer from "../Homepage/Footer";
-// import OrderCard from "./OrderCard";
-// import { TotalAndCheckout } from "./TotalAndCheckout";
 
 import { connect } from "react-redux";
 import { getCartItems } from "../../store/actions/cartActions";
@@ -14,9 +10,7 @@ class ConfirmOrders extends Component {
   }
 
   render() {
-    // const classes = useStyles();
-    console.log(this.props.itemsInCart);
-    return <ConfirmOrdersLayout cartItems={this.props.itemsInCart} />;
+    return <ConfirmOrdersLayout cartItems={this.props.itemsInCart} totalAmount={this.props.totalAmount}/>;
   }
 }
 
@@ -25,6 +19,8 @@ const mapStateToProps = (state) => {
     ...state,
     itemsInCart:
       (state.cart && state.cart.cart && state.cart.cart.itemsInCart) || {},
+    totalAmount:
+      (state.cart && state.cart.cart && state.cart.cart.totalAmount) || 0,
   };
 };
 
