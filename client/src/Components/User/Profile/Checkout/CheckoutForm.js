@@ -24,21 +24,9 @@ import FormLabel from "@material-ui/core/FormLabel";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // height: "90vh",
-    marginTop: '20px',
-    marginBottom: '20px'
-    // alignContent: 'center'
+    marginTop: "20px",
+    marginBottom: "20px",
   },
-  //   image: {
-  //     backgroundImage: `url(${Backgroundimg})`,
-  //     backgroundRepeat: "no-repeat",
-  //     backgroundColor:
-  //       theme.palette.type === "light"
-  //         ? theme.palette.grey[50]
-  //         : theme.palette.grey[900],
-  //     backgroundSize: "cover",
-  //     backgroundPosition: "center",
-  //   },
   paper: {
     margin: theme.spacing(8, 4),
     display: "flex",
@@ -47,14 +35,38 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    // backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "#ffb100",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
+
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+  },
+  button: {
+    border: "1px solid #ffb100",
+    color: "#fff",
+    marginLeft: "5px",
+    backgroundColor: "#ffb100",
+    fontWeight: 700,
+    "&:hover": {
+      backgroundColor: "#ffb100",
+      borderColor: "#ffb100",
+      color: "#000",
+      boxShadow: "none",
+    },
+    "&:active": {
+      boxShadow: "none",
+      backgroundColor: "#ffb100",
+      color: "fff",
+      borderColor: "#ffb100",
+    },
+    "&:focus": {
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
+    },
   },
 }));
 
@@ -82,7 +94,6 @@ export default function CheckoutForm(props) {
   return (
     <Grid container component="main" justify="center" className={classes.root}>
       <CssBaseline />
-      {/* <Grid item xs={false} sm={4} md={7} className={classes.image} /> */}
       <Grid item  component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
@@ -107,6 +118,7 @@ export default function CheckoutForm(props) {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  value="Mr. Dummy"
                   autoFocus
                   onChange={handleChange}
                 />
@@ -120,6 +132,7 @@ export default function CheckoutForm(props) {
                   id="lastName"
                   label="Last Name"
                   name="lastName"
+                  value="Dum"
                   autoComplete="lname"
                   onChange={handleChange}
                 />
@@ -146,6 +159,7 @@ export default function CheckoutForm(props) {
               fullWidth
               id="address"
               label="Address"
+              value="#007 Dummy Apartment"
               autoFocus
               onChange={handleChange}
             />
@@ -160,6 +174,7 @@ export default function CheckoutForm(props) {
                   fullWidth
                   id="country"
                   label="Country"
+                  value="India"
                   autoFocus
                   onChange={handleChange}
                 />
@@ -174,6 +189,7 @@ export default function CheckoutForm(props) {
                   fullWidth
                   id="state"
                   label="State"
+                  value="Karnataka"
                   autoFocus
                   onChange={handleChange}
                 />
@@ -219,7 +235,7 @@ export default function CheckoutForm(props) {
                   fullWidth
                   id="NameOnCard"
                   label="Name on card"
-                  autoFocus
+                  value="MR DUMMY DUM"
                   onChange={handleChange}
                 />
               </Grid>
@@ -232,6 +248,7 @@ export default function CheckoutForm(props) {
                   required
                   fullWidth
                   id="creditCardNumber"
+                  value="3458-3458-3458-3458"
                   label="Credit Card Number"
                   onChange={handleChange}
                 />
@@ -246,6 +263,7 @@ export default function CheckoutForm(props) {
                   fullWidth
                   id="expiration"
                   label="Expiration"
+                  value="10/2022"
                   onChange={handleChange}
                 />
               </Grid>
@@ -259,6 +277,7 @@ export default function CheckoutForm(props) {
                   fullWidth
                   id="CVV"
                   label="CVV"
+                  value="369"
                   onChange={handleChange}
                 />
               </Grid>
@@ -267,10 +286,10 @@ export default function CheckoutForm(props) {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
-              className={classes.submit}
+              // color="primary"
+              className={classes.button}
             >
-              Continue to Checkout
+              Place Order!
             </Button>
           </form>
         </div>
