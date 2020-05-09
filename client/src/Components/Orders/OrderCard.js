@@ -1,20 +1,20 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    paddingLeft:'10px',
-    margin:'auto',
+    paddingLeft: "10px",
+    margin: "auto",
     // flexGrow:1
   },
   bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
   },
   title: {
     fontSize: 14,
@@ -24,10 +24,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function OrderCard(props) {
+export default function OrderCard(order) {
   const classes = useStyles();
   // const {order} = props;
-
+  // console.log("OC:",props);
   return (
     <Card className={classes.root} square>
       <CardContent>
@@ -35,22 +35,18 @@ export default function OrderCard(props) {
           Order Id: {order.id}
         </Typography> */}
         <Typography variant="h6" component="h2">
-         Product: 
-         {/* {order.grill.name} */}
+          {order.name}
         </Typography>
         <br></br>
-        <Typography className={classes.pos} color="textSecondary">
-        Booking Info:
-        <br></br>
-          From Date: 
-          {/* {order.fromDate} {order.fromTime} */}
-          <br></br>
-          ToDate: 
+        <Typography color="textSecondary">Booking Info:</Typography>
+        <Typography color="textSecondary">From Date:</Typography>
+        {/* {order.fromDate} {order.fromTime} */}
+        <Typography color="textSecondary">
+          ToDate:
           {/* {order.toDate} {order.toTime} */}
         </Typography>
-        <Typography variant="body2" component="p">
-          Total amount paid: 
-          {/* {order.totalAmount} */}
+        <Typography color="textSecondary">
+          Total amount paid: ${order.price}
         </Typography>
       </CardContent>
     </Card>

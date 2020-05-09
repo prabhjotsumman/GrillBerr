@@ -8,7 +8,7 @@ import AuthInterface from './Components/Auth/AuthInterface';
 import PDP from './Components/Product/PDP';
 import Checkout from './Components/User/Profile/Checkout/Checkout';
 // import Orders from "./Components/Orders/Orders";
-import {ConfirmOrdersLayout} from "./Components/Orders/ConfirmOrdersLayout";
+import ConfirmOrders from "./Components/Orders/ConfirmOrders";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Homepage/Footer";
 
@@ -46,7 +46,7 @@ class App extends Component {
           path="/bbq"
           render={(props) => <PDP {...props}/>}
         />
-        <Route path="/confirmcheckout" component={ConfirmOrdersLayout} />
+        <Route path="/confirmcheckout" component={ConfirmOrders} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/profile" component={Profile} />
         <Footer/>

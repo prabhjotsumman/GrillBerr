@@ -65,6 +65,8 @@ class PDP extends Component {
 
   handleCart = (data,whatToDo) =>{
     console.log(data);
+
+    //check if dates are correctly filled
     switch(whatToDo){
       case "add":
         this.props.addToCart(data);
@@ -77,6 +79,10 @@ class PDP extends Component {
       default:
         break;
     }
+  }
+
+  handleDates = (toFromDates) =>{
+    console.log("PDP DATES:", toFromDates);
   }
   render() {
     console.log("PDP Props: ",this.props);
@@ -136,12 +142,12 @@ class PDP extends Component {
               >
                 ${currentGrill.price}
               </Typography>
-              <RentForm />
+              <RentForm handleDates={(toFromDates)=> this.handleDates(toFromDates)}/>
               <div style={{ marginTop: "10px" }}>
                 {this.props.status === "INTIAL" ||
                 this.state.status === "REMOVED" ? (
                   <>
-                    <Link to="/checkout" style={styles.link}>
+                    {/* <Link to="/checkout" style={styles.link}>
                       <Button
                         variant="outlined"
                         color="primary"
@@ -149,7 +155,7 @@ class PDP extends Component {
                       >
                         Rent it Now!
                       </Button>
-                    </Link>
+                    </Link> */}
 
                     <Button
                       variant="outlined"
