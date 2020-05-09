@@ -1,64 +1,205 @@
-const graphql = require('graphql');
-const _ = require('lodash');
-const GrillModel = require('../models/grills');
+const graphql = require("graphql");
+const _ = require("lodash");
+const Grills = require("../models/grills");
+const Reservation = require("../models/reservations");
+const Users = require("../models/users");
 
-const { GraphQLObjectType, GraphQLString, GraphQLSchema,GraphQLID, GraphQLList, GraphQLInt} = graphql;
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLSchema,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLList,
+} = graphql;
 
-const Grill = new GraphQLObjectType({
-    name:'Grill',
-    fields: () => ({
-        id: {type: GraphQLID},
-        name: {type: GraphQLString},
-        description: {type: GraphQLString},
-        type: {type: GraphQLString},
-        price: {type: GraphQLInt}
-    })
+const GrillType = new GraphQLObjectType({
+  name: "Grill",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    description: { type: GraphQLString },
+    type: { type: GraphQLString },
+    price: { type: GraphQLInt },
+    reservation: {
+      type: new GraphQLList(ReservationType),
+      resolve(parent, args) {
+        return Reservation.find({ grillId: parent.id });
+      },
+    },
+  }),
+});
+
+const UserType = new GraphQLObjectType({
+  name: "User",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    email: { type: GraphQLString },
+    reservation: {
+      type: new GraphQLList(ReservationType),
+      resolve(parent, args) {
+        return Reservation.find({ userId: parent.id });
+      },
+    },
+  }),
+});
+
+const ReservationType = new GraphQLObjectType({
+  name: "Reservation",
+  fields: () => ({
+    id: { type: GraphQLID },
+    userId: { type: GraphQLString },
+    grillId: { type: GraphQLString },
+    fromDate: { type: GraphQLString },
+    toDate: { type: GraphQLString },
+    fromTime: { type: GraphQLString },
+    toTime: { type: GraphQLString },
+    totalAmount: { type: GraphQLString },
+    grill: {
+      type: GrillType,
+      resolve(parent, args) {
+        return Grills.findById(parent.grillId);
+      },
+    },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return Users.findById(parent.userId);
+      },
+    },
+  }),
 });
 
 const RootQuery = new GraphQLObjectType({
-    name:'RootQueryType',
-    fields:{
-        grill:{
-            type:Grill,
-            args: { id:{type:GraphQLID}},
-            resolve(parent,args){
-                return GrillModel.findById(parent.id);
-            }
-        },
-        grills:{
-            type:new GraphQLList(Grill),
-            resolve(parent,args){
-                return GrillModel.find({});
-            }
-        },
-    }
+  name: "RootQueryType",
+  fields: {
+    grill: {
+      type: GrillType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Grills.findById(args.id);
+      },
+    },
+    grills: {
+      type: new GraphQLList(GrillType),
+      resolve(parent, args) {
+        return Grills.find({});
+      },
+    },
+    reservation: {
+      type: ReservationType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Reservation.findById(args.id);
+      },
+    },
+    reservationByUserID: {
+      type: new GraphQLList(ReservationType),
+      args: { userId: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Reservation.find({ userId: args.userId });
+      },
+    },
+    reservationByGrillID: {
+      type: new GraphQLList(ReservationType),
+      args: { grillId: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Reservation.find({ grillId: args.grillId });
+      },
+    },
+    reservations: {
+      type: new GraphQLList(ReservationType),
+      resolve(parent, args) {
+        return Reservation.find({});
+      },
+    },
+    userByEmail: {
+      type: new GraphQLList(UserType),
+      args: { email: { type: GraphQLString } },
+      resolve(parent, args) {
+        return Users.find({ email: args.email });
+      },
+    },
+    user: {
+      type: UserType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Users.findById(args.id);
+      },
+    },
+    users: {
+      type: new GraphQLList(UserType),
+      resolve(parent, args) {
+        return Users.find({});
+      },
+    },
+  },
 });
 
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     addGrill: {
-      type: Grill,
+      type: GrillType,
       args: {
         name: { type: GraphQLString },
-        description: { type: GraphQLString },
         type: { type: GraphQLString },
-        price: { type: GraphQLInt },
+        description: { type: GraphQLString },
+        price: { type: GraphQLString },
       },
-      resolve(parent, args){
-          let newGrill = new GrillModel({
-              name : args.name,
-              description : args.description,
-              type : args.type,
-              price : args.price
-          });
-          return newGrill.save();
-      }
-    }
-  }
+      resolve(parent, args) {
+        let grill = new Grills({
+          name: args.name,
+          type: args.type,
+          description: args.description,
+          price: args.price,
+        });
+        return grill.save();
+      },
+    },
+    addReservation: {
+      type: ReservationType,
+      args: {
+        userId: { type: GraphQLString },
+        grillId: { type: GraphQLString },
+        fromDate: { type: GraphQLString },
+        toDate: { type: GraphQLString },
+        fromTime: { type: GraphQLString },
+        toTime: { type: GraphQLString },
+        totalAmount: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        let reservation = new Reservation({
+          userId: args.userId,
+          grillId: args.grillId,
+          fromDate: args.fromDate,
+          toDate: args.toDate,
+          fromTime: args.fromTime,
+          toTime: args.toTime,
+          totalAmount: args.totalAmount,
+        });
+        return reservation.save();
+      },
+    },
+    addUser: {
+      type: UserType,
+      args: {
+        name: { type: GraphQLString },
+        email: { type: GraphQLString },
+      },
+      resolve(parent, args) {
+        let user = new Users({
+          name: args.name,
+          email: args.email,
+        });
+        return user.save();
+      },
+    },
+  },
 });
 
 module.exports = new GraphQLSchema({
-    query:RootQuery,
-    mutation: Mutation
+  query: RootQuery,
+  mutation: Mutation,
 });
