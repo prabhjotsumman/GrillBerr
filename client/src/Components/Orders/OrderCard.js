@@ -7,6 +7,9 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    paddingLeft:'10px',
+    margin:'auto',
+    // flexGrow:1
   },
   bullet: {
     display: 'inline-block',
@@ -17,33 +20,37 @@ const useStyles = makeStyles({
     fontSize: 14,
   },
   pos: {
-    marginBottom: 12,
+    // marginBottom: 12,
   },
 });
 
 export default function OrderCard(props) {
   const classes = useStyles();
-  const {order} = props;
+  // const {order} = props;
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} square>
       <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
+        {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
           Order Id: {order.id}
-        </Typography>
-        <Typography variant="h5" component="h2">
-         Product: {order.grill.name}
+        </Typography> */}
+        <Typography variant="h6" component="h2">
+         Product: 
+         {/* {order.grill.name} */}
         </Typography>
         <br></br>
         <Typography className={classes.pos} color="textSecondary">
         Booking Info:
         <br></br>
-          From Date: {order.fromDate} {order.fromTime}
+          From Date: 
+          {/* {order.fromDate} {order.fromTime} */}
           <br></br>
-          ToDate: {order.toDate} {order.toTime}
+          ToDate: 
+          {/* {order.toDate} {order.toTime} */}
         </Typography>
         <Typography variant="body2" component="p">
-          Total amount paid: {order.totalAmount}
+          Total amount paid: 
+          {/* {order.totalAmount} */}
         </Typography>
       </CardContent>
     </Card>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import OrderCard from './orderCard';
+import OrderCard from './OrderCard';
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress } from '@material-ui/core/';
