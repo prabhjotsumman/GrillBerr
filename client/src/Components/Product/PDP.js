@@ -142,10 +142,8 @@ class PDP extends Component {
               </Typography>
               <RentForm />
               <div style={{ marginTop: "10px" }}>
-                {(
-                  this.props.status === "INTIAL" ||
-                  this.state.status === "REMOVED"
-                ) ? (
+                {this.props.status === "INTIAL" ||
+                this.state.status === "REMOVED" ? (
                   <>
                     <Link to="/checkout" style={styles.link}>
                       <Button
@@ -168,7 +166,7 @@ class PDP extends Component {
                   </>
                 ) : (
                   <>
-                    <Button
+                    {/* <Button
                       variant="contained"
                       color="secondary"
                       style={styles.buttons}
@@ -176,7 +174,7 @@ class PDP extends Component {
                       // onClick={() => this.handleCart(currentGrill)}
                     >
                       Added
-                    </Button>
+                    </Button> */}
                     <Button
                       variant="outlined"
                       color="secondary"
@@ -185,6 +183,15 @@ class PDP extends Component {
                     >
                       Remove from Cart
                     </Button>
+                    <Link to="/checkout" style={styles.link}>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        style={styles.buttons}
+                      >
+                        Checkout
+                      </Button>
+                    </Link>
                   </>
                 )}
               </div>

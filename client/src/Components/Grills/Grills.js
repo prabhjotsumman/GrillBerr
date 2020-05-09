@@ -34,7 +34,7 @@ export default function Grills() {
   if (data) {
     grills = data.grills.map((grill, index) => {
       return (
-        <Grid key={grill.id} item xs={7} sm={6} md={3}>
+        <Grid key={grill.id} item xs sm md lg>
           <GrillCard grill={grill}></GrillCard>
         </Grid>
       );
@@ -47,7 +47,7 @@ export default function Grills() {
         container
         direction="row"
         justify="center"
-        alignItems="baseline"
+        alignItems="center"
         spacing={3}
       >
         {loading ? <CircularProgress /> : grills}
