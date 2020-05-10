@@ -7,6 +7,7 @@ const styles = {
   container: {
     padding: "10px",
     flexGrow: 1,
+    minHeight: '81vh'
   },
 };
 

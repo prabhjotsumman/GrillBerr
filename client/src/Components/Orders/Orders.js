@@ -15,7 +15,8 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
     padding: theme.spacing(0, 3),
     flexGrow: 1,
-    margin: '20px 40px'
+    margin: '20px 40px',
+    minHeight: '75vh'
   },
   centerGrid: {
     justifyContent: 'center'
