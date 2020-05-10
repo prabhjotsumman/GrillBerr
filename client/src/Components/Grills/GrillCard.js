@@ -45,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  modalCloseButton:{
+    float: 'right',
+    fontWeight: '700',
+    fontSize: 'x-large',
+  }
 }));
 
 function GrillCard(props) {
@@ -111,6 +116,7 @@ function GrillCard(props) {
         }}
       >
         <div className={classes.paper}>
+          <Button className={classes.modalCloseButton} onClick={handleClose}>X</Button>
           <PDP {...currentGrill} />
         </div>
       </Modal>

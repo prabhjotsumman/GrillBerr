@@ -116,12 +116,12 @@ class PDP extends Component {
           alignItems="center"
           spacing={3}
         >
-          <Grid item xs={8} sm={5} md={5}>
+          <Grid item xs={8} sm={4} md={4}>
             {/* <Paper elevation={3} >  */}
             <img src={grillImg} alt="grill img" style={styles.image} />
             {/* </Paper> */}
           </Grid>
-          <Grid item xs={12} sm={6} md={5}>
+          <Grid item xs={12} sm={7} md={7}>
             {/* <Paper elevation={3}> */}
             <div style={styles.details}>
               <Typography gutterBottom variant="h5" component="h2">
