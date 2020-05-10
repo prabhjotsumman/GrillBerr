@@ -5,6 +5,12 @@ import Typography from "@material-ui/core/Typography";
 import RentForm from "./PDPrentForm";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import {
+  addToCart,
+  removeFromCart,
+  isItemInCart,
+} from "../../store/actions/cartActions";
 
 const styles = {
   root: {
@@ -44,49 +50,65 @@ const styles = {
 };
 
 class PDP extends Component {
-  constructor(){
+  constructor() {
     super();
-      this.state ={
-        status : "INTIAL",
-        currentGrill: null
-      }
+    this.state = {
+      status: "",
+      currentGrill: null,
+    };
   }
-  componentDidMount(){
-    this.setState({currentGrill:this.props.currentGrill});
-    if(this.state.currentGrill){
-        this.props.isItemInCart(this.state.currentGrill);
+  componentDidMount() {
+    this.props.isItemInCart(this.props.grill);
+
+    const isItemAlreadyInCart = this.props.status; // ADDED, REMOVED, INITIAL
+    isItemAlreadyInCart === "ADDED"
+      ? this.setState({ status: "ADDED" })
+      : this.setState({ status: "REMOVED" });
+  }
+
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.status !== prevProps.status) {
+      // this.fetchData(this.props.userID);
+      this.setState({status: this.props.status})
     }
   }
 
-  handleCart = (data,whatToDo) =>{
+  handleCart = (data, whatToDo) => {
     console.log(data);
 
     //check if dates are correctly filled
-    switch(whatToDo){
+    switch (whatToDo) {
       case "add":
         this.props.addToCart(data);
         this.setState({ status: "ADDED" });
         break;
       case "remove":
         this.props.removeFromCart(data);
-        this.setState({status: "REMOVED"})
+        this.setState({ status: "REMOVED" });
         break;
       default:
         break;
     }
-  }
+  };
 
-  handleDates = (toFromDates) =>{
+  handleDates = (toFromDates) => {
     console.log("PDP DATES:", toFromDates);
-  }
+  };
   render() {
-    console.log("PDP Props: ",this.props);
-    console.log("PDP state: ",this.state);
+    // console.log("PDP Props: ", this.props);
     let currentGrill = this.props.grill || {};
     const grillImg =
       "https://cdn.shopify.com/s/files/1/1205/3574/products/gas-bbq-grill-rentuu-1479788757021_320x.jpg?v=1534508821";
     return (
-      <div style={{ flexGrow: 1, padding: "0px", overflow: "hidden", height:"81vh" }}>
+      <div
+        style={{
+          flexGrow: 1,
+          padding: "0px",
+          overflow: "hidden",
+          height: "81vh",
+        }}
+      >
         <Grid
           container
           direction="row"
@@ -134,18 +156,20 @@ class PDP extends Component {
               >
                 ${currentGrill.price}
               </Typography>
-              <RentForm handleDates={(toFromDates)=> this.handleDates(toFromDates)}/>
+              <RentForm
+                handleDates={(toFromDates) => this.handleDates(toFromDates)}
+              />
               <div style={{ marginTop: "10px" }}>
-                {this.props.status === "INTIAL" ||
+                {this.state.status === "INTIAL" ||
                 this.state.status === "REMOVED" ? (
-                    <Button
-                      variant="outlined"
-                      color="secondary"
-                      style={styles.buttons}
-                      onClick={() => this.handleCart(currentGrill, "add")}
-                    >
-                      Add to Cart
-                    </Button>
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    style={styles.buttons}
+                    onClick={() => this.handleCart(currentGrill, "add")}
+                  >
+                    Add to Cart
+                  </Button>
                 ) : (
                   <>
                     <Button
@@ -175,5 +199,21 @@ class PDP extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    itemsInCart:
+      (state.cart && state.cart.cart && state.cart.cart.itemsInCart) || {},
+    status:
+      (state.cart && state.cart.cart && state.cart.cart.status) || "INTIAL",
+  };
+};
 
-export default PDP;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addToCart: (data) => dispatch(addToCart(data)),
+    removeFromCart: (data) => dispatch(removeFromCart(data)),
+    isItemInCart: (data) => dispatch(isItemInCart(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PDP);

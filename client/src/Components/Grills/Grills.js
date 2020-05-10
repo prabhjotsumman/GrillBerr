@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Grills() {
   const classes = useStyles();
   const { loading, error, data } = useQuery(getGrillQuery);
-  console.log("DATA: ", data);
+  // console.log("DATA: ", data);
 
   let grills = {};
 

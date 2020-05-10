@@ -37,13 +37,16 @@ class App extends Component {
   render() {
     // const { user, signOut, signInWithGoogle } = this.props;
 
-    console.log("_APP:CART_STATUS", this.props.itemsInCart);
+    // console.log("_APP:CART_STATUS", this.props.itemsInCart);
 
     return (
       <>
         <Router>
           <Navbar />
-          <Route exact path="/" component={Homepage} />
+          <Route exact 
+            path="/" 
+            render={(props) => <Homepage {...this.props}/>}
+          />
           <Route
             path="/signin"
             render={(props) => <AuthInterface {...props} mode="signin" />}
@@ -64,7 +67,7 @@ class App extends Component {
 
 // export default App;
 const mapStateToProps = (state) => {
-  console.log("APP:", state);
+  // console.log("APP:", state);
   return {
     // currentGrill: state.grill.grill,
     itemsInCart:
