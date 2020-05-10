@@ -48,11 +48,11 @@ ReactDOM.render(
       config={reduxFirebase}
       dispatch={store.dispatch}
     >
-      <React.StrictMode>
+      {/* <React.StrictMode> */}
         <AuthIsLoaded>
           <App />
         </AuthIsLoaded>
-      </React.StrictMode>
+      {/* </React.StrictMode> */}
     </ReactReduxFirebaseProvider>
   </Provider>
   </ApolloProvider>,

@@ -2,7 +2,7 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   GET_CART_ITEMS,
-  GET_CART_STATUS,
+  IS_ITEM_IN_CART,
 } from "../../constants/constants";
 
 export const addToCart = (data) => {
@@ -23,8 +23,8 @@ export const getCartItems = () => {
   };
 };
 
-export const getCartStatus = (data) => {
+export const isItemInCart = (data) => {
   return (dispatch, getState) => {
-    return dispatch({ type: GET_CART_STATUS , payload: data});
+    return dispatch({ type: IS_ITEM_IN_CART, payload: data });
   };
 };

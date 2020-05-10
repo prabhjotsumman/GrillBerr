@@ -2,13 +2,9 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import StarIcon from "@material-ui/icons/Star";
 import Typography from "@material-ui/core/Typography";
-
 import RentForm from "./PDPrentForm";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import {getCurrentGrill} from "../../store/actions/grillActions";
-import { addToCart, removeFromCart, getCartStatus } from "../../store/actions/cartActions";
 
 const styles = {
   root: {
@@ -56,10 +52,9 @@ class PDP extends Component {
       }
   }
   componentDidMount(){
-    this.props.getCurrentGrill();
     this.setState({currentGrill:this.props.currentGrill});
     if(this.state.currentGrill){
-        this.props.getCartStatus(this.state.currentGrill);
+        this.props.isItemInCart(this.state.currentGrill);
     }
   }
 
@@ -87,10 +82,7 @@ class PDP extends Component {
   render() {
     console.log("PDP Props: ",this.props);
     console.log("PDP state: ",this.state);
-    let currentGrill = this.props.currentGrill || {};
-    if(currentGrill.id){
-      // this.props.getCartStatus(currentGrill);
-    } 
+    let currentGrill = this.props.grill || {};
     const grillImg =
       "https://cdn.shopify.com/s/files/1/1205/3574/products/gas-bbq-grill-rentuu-1479788757021_320x.jpg?v=1534508821";
     return (
@@ -146,17 +138,6 @@ class PDP extends Component {
               <div style={{ marginTop: "10px" }}>
                 {this.props.status === "INTIAL" ||
                 this.state.status === "REMOVED" ? (
-                  <>
-                    {/* <Link to="/checkout" style={styles.link}>
-                      <Button
-                        variant="outlined"
-                        color="primary"
-                        style={styles.buttons}
-                      >
-                        Rent it Now!
-                      </Button>
-                    </Link> */}
-
                     <Button
                       variant="outlined"
                       color="secondary"
@@ -165,7 +146,6 @@ class PDP extends Component {
                     >
                       Add to Cart
                     </Button>
-                  </>
                 ) : (
                   <>
                     <Button
@@ -196,24 +176,4 @@ class PDP extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state)
-  return {
-    currentGrill: state.grill.grill,
-    itemsInCart:
-      (state.cart && state.cart.cart && state.cart.cart.itemsInCart) || {},
-    status:
-      (state.cart && state.cart.cart && state.cart.cart.status) || "INTIAL",
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getCurrentGrill: () => dispatch(getCurrentGrill()),
-    addToCart: (data) => dispatch(addToCart(data)),
-    removeFromCart: (data) => dispatch(removeFromCart(data)),
-    getCartStatus: (data) => dispatch(getCartStatus(data))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(PDP);
+export default PDP;

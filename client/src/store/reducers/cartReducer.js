@@ -2,7 +2,7 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   GET_CART_ITEMS,
-  GET_CART_STATUS,
+  IS_ITEM_IN_CART,
 } from "../../constants/constants";
 
 const initState = {};
@@ -10,7 +10,7 @@ const initState = {};
 const cartReducer = (state = initState, action) => {
   let cart = [];
   switch (action.type) {
-    case GET_CART_STATUS:
+    case IS_ITEM_IN_CART:
       cart = JSON.parse(localStorage.getItem("itemsInCart")) || [];
       const presentInCart = cart.find((item) => item.id === action.payload.id);
       const status = presentInCart ? "ADDED" : "REMOVED";
