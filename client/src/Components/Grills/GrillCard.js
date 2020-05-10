@@ -11,8 +11,6 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 
 import PDP from "../Product/PDP";
-import { isItemInCart } from "../../store/actions/cartActions";
-import {connect} from 'react-redux' 
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,8 +53,6 @@ function GrillCard(props) {
   const [currentGrill] = useState({ grill });
   const [open, setOpen] = React.useState(false);
 
-  // console.log("<GRillcard/>: ",props);
-  
   const handleOpen = () => {
     setOpen(true);
   };
@@ -115,24 +111,12 @@ function GrillCard(props) {
         }}
       >
         <div className={classes.paper}>
-          <PDP {...currentGrill} prev_status= {props.status} />
+          <PDP {...currentGrill} />
         </div>
       </Modal>
       </div>
     </>
   );
 }
-const mapStateToProps = (state) => {
-  return {
-    status:
-      (state.cart && state.cart.cart && state.cart.cart.status) || "INTIAL",
-  };
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    isItemInCart: (data) => dispatch(isItemInCart(data)),
-  };
-};
-export default connect(mapStateToProps,mapDispatchToProps)(GrillCard);
-// export default GrillCard;
+export default GrillCard;
