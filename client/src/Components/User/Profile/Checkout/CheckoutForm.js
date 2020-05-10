@@ -5,7 +5,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-// import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -18,10 +17,6 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { Link } from "react-router-dom";
-
-// import Backgroundimg from "../../assets/grill.jpg";
-
-// import { Link as RLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,13 +64,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   orderPlaced: {
-    // marginTop: theme.spacing(3),
     margin: theme.spacing(8, 4),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     color: "#ffb100",
-    // height: "69vh",
   },
   link:{
     textDecoration: 'none'
@@ -104,8 +97,6 @@ export default function CheckoutForm(props) {
     e.preventDefault();
     console.log("checkout JSON", formData);
     setOrderPlaced(true);
-    // return setTimeout(<Redirect to="/orders"/>,3000);
-    // console.log(props);
     // props.handleLogin(formData);
   };
 

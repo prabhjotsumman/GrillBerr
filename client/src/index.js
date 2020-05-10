@@ -37,7 +37,7 @@ const reduxFirebase = {
 
 function AuthIsLoaded({ children }) {
   const auth = useSelector((state) => state.firebase.auth);
-  if (!isLoaded(auth)) return <div><h3>Loading your Grillber Experience...</h3></div>;
+  if (!isLoaded(auth)) return <div></div>;
   return children;
 }
 ReactDOM.render(

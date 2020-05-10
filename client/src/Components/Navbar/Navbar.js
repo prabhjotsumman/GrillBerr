@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import { Link as RLink } from "react-router-dom";
 
 import {signOut } from '../../store/actions/authActions';
-// import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,25 +53,13 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (props) => {
   const classes = useStyles();
   const LoggedIn = props.firebase.auth.uid;
-  // const location = useLocation();
-  // console.log(LoggedIn);
   return (
     <div className={classes.root}>
       <AppBar position="sticky" color="transparent" className={classes.appbar}>
         <Toolbar>
-          {/* <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <OutdoorGrillIcon fontSize="large" className={classes.icon}/>
-          </IconButton> */}
-          {/* <RLink to="/" clasName={classes.link}>  */}
             <Typography variant="h4" className={classes.title}>
               Grillber
             </Typography>
-          {/* </RLink> */}
           {!LoggedIn ? (
             <RLink to="/signin" className={classes.link}>
               <Button color="inherit" className={classes.button}>

@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-// import SignInSide from "./Components/login";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Homepage from "./Components/Homepage/Homepage";
-import Profile from "./Components/User/Profile/Profile";
+// import Profile from "./Components/User/Profile/Profile";
 import AuthInterface from "./Components/Auth/AuthInterface";
 import Checkout from "./Components/User/Profile/Checkout/Checkout";
 import ConfirmOrders from "./Components/Orders/ConfirmOrders";
@@ -61,7 +60,7 @@ class App extends Component {
           <Route path="/orders" 
             render= {(props) => <Orders {...this.props}/>}
           />
-          <Route path="/profile" component={Profile} />
+          {/* <Route path="/profile" component={Profile} /> */}
           <Footer />
         </Router>
       </>
@@ -69,7 +68,6 @@ class App extends Component {
   }
 }
 
-// export default App;
 const mapStateToProps = (state) => {
   // console.log("APP:", state);
   return {
