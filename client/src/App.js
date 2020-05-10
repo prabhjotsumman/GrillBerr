@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 import Homepage from "./Components/Homepage/Homepage";
 // import Profile from "./Components/User/Profile/Profile";
@@ -43,24 +43,28 @@ class App extends Component {
       <>
         <Router>
           <Navbar />
-          <Route exact 
-            path="/" 
-            render={(props) => <Homepage {...this.props}/>}
-          />
-          <Route
-            path="/signin"
-            render={(props) => <AuthInterface {...props} mode="signin" />}
-          />
-          <Route
-            path="/signup"
-            render={(props) => <AuthInterface {...props} mode="signup" />}
-          />
-          <Route path="/confirmcheckout" component={ConfirmOrders} />
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/orders" 
-            render= {(props) => <Orders {...this.props}/>}
-          />
-          {/* <Route path="/profile" component={Profile} /> */}
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={(props) => <Homepage {...this.props} />}
+            />
+            <Route
+              path="/signin"
+              render={(props) => <AuthInterface {...props} mode="signin" />}
+            />
+            <Route
+              path="/signup"
+              render={(props) => <AuthInterface {...props} mode="signup" />}
+            />
+            <Route path="/confirmcheckout" component={ConfirmOrders} />
+            <Route path="/checkout" component={Checkout} />
+            <Route
+              path="/orders"
+              render={(props) => <Orders {...this.props} />}
+            />
+            <Redirect to="/" />
+          </Switch>
           <Footer />
         </Router>
       </>
