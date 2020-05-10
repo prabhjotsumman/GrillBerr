@@ -17,6 +17,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 // import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import { Link } from "react-router-dom";
 
 // import Backgroundimg from "../../assets/grill.jpg";
 
@@ -76,6 +77,9 @@ const useStyles = makeStyles((theme) => ({
     color: "#ffb100",
     // height: "69vh",
   },
+  link:{
+    textDecoration: 'none'
+  }
 }));
 
 export default function CheckoutForm(props) {
@@ -96,6 +100,8 @@ export default function CheckoutForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("checkout JSON", formData);
+    setOrderPlaced(true);
+    // return setTimeout(<Redirect to="/orders"/>,3000);
     // console.log(props);
     // props.handleLogin(formData);
   };
@@ -114,6 +120,11 @@ export default function CheckoutForm(props) {
             <Typography variant="h5" component="p">
               Order Placed Successfully .
             </Typography>
+            <Link to="/orders" className={classes.link}>
+              <Typography variant="h6" color="textSecondary">
+                Goto my Orders
+              </Typography>
+            </Link>
           </div>
         </Grid>
       ) : (
@@ -320,7 +331,7 @@ export default function CheckoutForm(props) {
                   variant="contained"
                   // color="primary"
                   className={classes.button}
-                  onClick={() => setOrderPlaced(true)}
+                  onClick={(e)=>handleSubmit(e)}
                 >
                   Place Order!
                 </Button>

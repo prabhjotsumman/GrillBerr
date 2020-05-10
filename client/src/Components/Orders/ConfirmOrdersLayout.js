@@ -28,7 +28,7 @@ export function ConfirmOrdersLayout(props) {
         <Grid item sm={7} md={7} className={classes.orderCardContainer}>
           {cartItems && cartItems.length > 0
             ? cartItems.map((order) => {
-                return <OrderCard {...order} key={order.id} />;
+                return <OrderCard order={order} key={order.id} />;
               })
             : ""}
         </Grid>
