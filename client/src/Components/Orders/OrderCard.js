@@ -24,9 +24,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function OrderCard(order) {
+export default function OrderCard(props) {
   const classes = useStyles();
-  // const {order} = props;
+  // console.log(order)
+  const {order} = props;
   // console.log("OC:",props);
   return (
     <Card className={classes.root} square>
@@ -38,7 +39,7 @@ export default function OrderCard(order) {
           {order.name}
         </Typography>
         <br></br>
-        <Typography color="textSecondary">Booking Info:</Typography>
+      <Typography color="textSecondary">Booking Info: {order.id}</Typography>
         <Typography color="textSecondary">From Date:</Typography>
         {/* {order.fromDate} {order.fromTime} */}
         <Typography color="textSecondary">

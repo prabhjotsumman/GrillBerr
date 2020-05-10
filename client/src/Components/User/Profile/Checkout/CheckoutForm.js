@@ -41,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
-
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -68,6 +67,15 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
     },
   },
+  orderPlaced: {
+    // marginTop: theme.spacing(3),
+    margin: theme.spacing(8, 4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    color: "#ffb100",
+    // height: "69vh",
+  },
 }));
 
 export default function CheckoutForm(props) {
@@ -76,6 +84,7 @@ export default function CheckoutForm(props) {
   const initialFormData = {};
 
   const [formData, updateFormData] = React.useState(initialFormData);
+  const [orderPlaced, setOrderPlaced] = React.useState(false);
 
   const handleChange = (e) => {
     updateFormData({
@@ -92,53 +101,75 @@ export default function CheckoutForm(props) {
   };
 
   return (
-    <Grid container component="main" justify="center" className={classes.root}>
-      <CssBaseline />
-      <Grid item  component={Paper} elevation={6} square>
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Checkout
-          </Typography>
-          <form
-            className={classes.form}
-            noValidate
-            onSubmit={(e) => handleSubmit(e)}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  value="Mr. Dummy"
-                  autoFocus
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  value="Dum"
-                  autoComplete="lname"
-                  onChange={handleChange}
-                />
-              </Grid>
-            </Grid>
-            {/* <TextField
+    <>
+      {orderPlaced ? (
+        <Grid
+          item
+          component={Paper}
+          elevation={6}
+          square
+          className={classes.orderPlaced}
+        >
+          <div className={classes.orderPlaced}>
+            <Typography variant="h5" component="p">
+              Order Placed Successfully .
+            </Typography>
+          </div>
+        </Grid>
+      ) : (
+        <Grid
+          container
+          component="main"
+          justify="center"
+          className={classes.root}
+        >
+          <CssBaseline />
+
+          <Grid item component={Paper} elevation={6} square>
+            <div className={classes.paper}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Checkout
+              </Typography>
+              <form
+                className={classes.form}
+                noValidate
+                onSubmit={(e) => handleSubmit(e)}
+              >
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete="fname"
+                      name="firstName"
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="firstName"
+                      label="First Name"
+                      value="Mr. Dummy"
+                      autoFocus
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="lastName"
+                      label="Last Name"
+                      name="lastName"
+                      value="Dum"
+                      autoComplete="lname"
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                </Grid>
+                {/* <TextField
               variant="outlined"
               margin="normal"
               required
@@ -150,150 +181,154 @@ export default function CheckoutForm(props) {
               autoFocus
               onChange={handleChange}
             /> */}
-            <TextField
-              autoComplete="address"
-              name="address"
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="address"
-              label="Address"
-              value="#007 Dummy Apartment"
-              autoFocus
-              onChange={handleChange}
-            />
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="country"
-                  name="country"
+                  autoComplete="address"
+                  name="address"
                   variant="outlined"
                   margin="normal"
                   required
                   fullWidth
-                  id="country"
-                  label="Country"
-                  value="India"
+                  id="address"
+                  label="Address"
+                  value="#007 Dummy Apartment"
                   autoFocus
                   onChange={handleChange}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="state"
-                  name="state"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="state"
-                  label="State"
-                  value="Karnataka"
-                  autoFocus
-                  onChange={handleChange}
-                />
-              </Grid>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete="country"
+                      name="country"
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="country"
+                      label="Country"
+                      value="India"
+                      autoFocus
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete="state"
+                      name="state"
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="state"
+                      label="State"
+                      value="Karnataka"
+                      autoFocus
+                      onChange={handleChange}
+                    />
+                  </Grid>
 
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="Shipping address is the same as my billing address."
-                />
-              </Grid>
-            </Grid>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Payment Method</FormLabel>
-              <RadioGroup
-                aria-label="payment Method"
-                name="Payment Method"
-                // value={value}
-                onChange={handleChange}
-              >
-                <FormControlLabel
-                  value="debitCard"
-                  control={<Radio />}
-                  label="Debit Card"
-                />
-                <FormControlLabel
-                  value="creditCard"
-                  control={<Radio />}
-                  label="Credit Card"
-                />
-              </RadioGroup>
-            </FormControl>
-            <Grid container spacing={1}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="nameoncard"
-                  name="NameOnCard"
-                  variant="outlined"
-                  margin="normal"
-                  required
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox value="allowExtraEmails" color="primary" />
+                      }
+                      label="Shipping address is the same as my billing address."
+                    />
+                  </Grid>
+                </Grid>
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Payment Method</FormLabel>
+                  <RadioGroup
+                    aria-label="payment Method"
+                    name="Payment Method"
+                    // value={value}
+                    onChange={handleChange}
+                  >
+                    <FormControlLabel
+                      value="debitCard"
+                      control={<Radio />}
+                      label="Debit Card"
+                      checked
+                    />
+                    <FormControlLabel
+                      value="creditCard"
+                      control={<Radio />}
+                      label="Credit Card"
+                    />
+                  </RadioGroup>
+                </FormControl>
+                <Grid container spacing={1}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete="nameoncard"
+                      name="NameOnCard"
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="NameOnCard"
+                      label="Name on card"
+                      value="MR DUMMY DUM"
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete="creditcardnumber"
+                      name="CreditCardNumber"
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="creditCardNumber"
+                      value="3458-3458-3458-3458"
+                      label="Credit Card Number"
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete="expiration"
+                      name="expiration"
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="expiration"
+                      label="Expiration"
+                      value="10/2022"
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      autoComplete="CVV"
+                      name="CVV"
+                      variant="outlined"
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="CVV"
+                      label="CVV"
+                      value="369"
+                      onChange={handleChange}
+                    />
+                  </Grid>
+                </Grid>
+                <Button
+                  type="submit"
                   fullWidth
-                  id="NameOnCard"
-                  label="Name on card"
-                  value="MR DUMMY DUM"
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="creditcardnumber"
-                  name="CreditCardNumber"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="creditCardNumber"
-                  value="3458-3458-3458-3458"
-                  label="Credit Card Number"
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="expiration"
-                  name="expiration"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="expiration"
-                  label="Expiration"
-                  value="10/2022"
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="CVV"
-                  name="CVV"
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="CVV"
-                  label="CVV"
-                  value="369"
-                  onChange={handleChange}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              // color="primary"
-              className={classes.button}
-            >
-              Place Order!
-            </Button>
-          </form>
-        </div>
-      </Grid>
-    </Grid>
+                  variant="contained"
+                  // color="primary"
+                  className={classes.button}
+                  onClick={() => setOrderPlaced(true)}
+                >
+                  Place Order!
+                </Button>
+              </form>
+            </div>
+          </Grid>
+        </Grid>
+      )}
+    </>
   );
 }

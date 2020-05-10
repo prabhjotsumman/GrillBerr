@@ -9,6 +9,7 @@ import Checkout from "./Components/User/Profile/Checkout/Checkout";
 import ConfirmOrders from "./Components/Orders/ConfirmOrders";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Homepage/Footer";
+import Orders from "./Components/Orders/Orders";
 import { connect } from "react-redux";
 import { getCurrentGrill, setCurrentGrill } from "./store/actions/grillActions";
 import {
@@ -57,6 +58,9 @@ class App extends Component {
           />
           <Route path="/confirmcheckout" component={ConfirmOrders} />
           <Route path="/checkout" component={Checkout} />
+          <Route path="/orders" 
+            render= {(props) => <Orders {...this.props}/>}
+          />
           <Route path="/profile" component={Profile} />
           <Footer />
         </Router>
