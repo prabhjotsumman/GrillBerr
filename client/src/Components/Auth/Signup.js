@@ -12,7 +12,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Backgroundimg from "../../assets/grill.jpg";
-
+import { addUser } from "../Queries/queries";
+import { useMutation } from "@apollo/react-hooks";
 import { Link as RLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,27 +51,31 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Signup(props) {
   const classes = useStyles();
+  const [addUserToMongo] = useMutation(addUser);
 
-  const initstate = {
+  const initialFormData = {
     email: "",
     password: "",
     firstName: "",
     lastName: "",
   };
 
-  const [state, setState] = React.useState(initstate);
+  const [formData, updateFormData] = React.useState(initialFormData);
 
   const handleChange = (e) => {
-    setState({
-      ...state,
+    updateFormData({
+      ...formData,
       [e.target.id]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(state);
-    props.handleSignUp(state);
+    // console.log(state);
+    addUserToMongo({
+      variables: { name: `${formData.firstName} ${formData.lastName}` , email: formData.email },
+    });
+    props.handleSignUp(formData);
   };
   return (
     <Grid container component="main" className={classes.root}>

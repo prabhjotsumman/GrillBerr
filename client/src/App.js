@@ -9,7 +9,7 @@ import {
 
 import Homepage from "./Components/Homepage/Homepage";
 import AuthInterface from "./Components/Auth/AuthInterface";
-import Checkout from "./Components/User/Profile/Checkout/Checkout";
+import Checkout from "./Components/Checkout/Checkout";
 import ConfirmOrders from "./Components/Orders/ConfirmOrders";
 import Navbar from "./Components/Navbar/Navbar";
 import Footer from "./Components/Homepage/Footer";
@@ -61,7 +61,7 @@ class App extends Component {
             />
             <Route
               path="/checkout"
-              render={() => (isAuthenticated ? <Checkout /> : <PleaseLogin />)}
+              render={() => (isAuthenticated ? <Checkout {...this.props}/> : <PleaseLogin />)}
             />
             <Route
               path="/orders"

@@ -1,70 +1,108 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+// import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    marginBottom: '5px'
-  }, 
+    marginBottom: "5px",
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    maxWidth: 300,
+  },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 200,
   },
+  link: {
+    color: "#fff",
+    textDecoration: "none",
+  },
+  btn: {
+    margin: "0 10px",
+  },
 }));
 
 export default function DateAndTimePickers(props) {
   const classes = useStyles();
+  const date = new Date().toISOString().split("T")[0];
+  const fromTime = "07:30";
+  const toTime = "08:30";
 
-  //"2020-05-09"
-  const dateNow = new Date().toISOString().substr(0,10);
-  // "6:30:32 PM"
-  const timeNow = new Date().toLocaleTimeString();
-  
   const initialFormData = Object.freeze({
-     fromDate: dateNow,
-     toDate: timeNow,
-   });
+    fromDate: date,
+    fromTime: fromTime,
+    toDate: date,
+    toTime: toTime,
+  });
 
-   const [formData, updateFormData] = React.useState(initialFormData);
+  const [formData, updateFormData] = React.useState(initialFormData);
 
-   const handleChange = (e) => {
-     updateFormData({
-       ...formData,
-       [e.target.name]: e.target.value.trim(),
-     });
-     console.log(formData);
-     props.handleDates(formData);
-   };
+  useEffect(()=>{
+    props.handleDates(formData);
+  },[])
+
+  const handleChange = (e) => {
+    updateFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+    props.handleDates(formData);
+  };
 
   return (
-    <form className={classes.container} id="toFromDateForm">
-      <TextField
-        id="fromDateField"
-        label="From Date"
-        name="fromDate"
-        type="datetime-local"
-        // defaultValue={`${dateNow} + "T10:30"`}
-        className={classes.textField}
-        onChange={handleChange}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <TextField
-        id="toDateField"
-        label="To Date"
-        name="toDate"
-        type="datetime-local"
-        // defaultValue="2020-05-12T11:00"
-        onChange={handleChange}
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
+    <form className={classes.container} noValidate>
+      <div>
+        <TextField
+          id="fromDate"
+          label="From Date"
+          type="date"
+          value={formData.fromDate}
+          className={classes.textField}
+          onChange={handleChange}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          id="fromTime"
+          label="From Time"
+          type="time"
+          value={formData.fromTime}
+          className={classes.textField}
+          onChange={handleChange}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          id="toDate"
+          label="To Date"
+          type="date"
+          value={formData.toDate}
+          className={classes.textField}
+          onChange={handleChange}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          id="toTime"
+          label="To Time"
+          type="time"
+          value={formData.toTime}
+          className={classes.textField}
+          onChange={handleChange}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+      </div>
     </form>
   );
 }

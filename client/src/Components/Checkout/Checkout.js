@@ -17,7 +17,7 @@ class Orders extends Component {
         <CssBaseline />
         <Grid container direction="row" justify="center">
           <Grid item xs={12} sm={7}>
-            <CheckoutForm />
+            <CheckoutForm {...this.props}/>
           </Grid>
         </Grid>
       </div>

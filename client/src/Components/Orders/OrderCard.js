@@ -29,28 +29,33 @@ export default function OrderCard(props) {
   const {order} = props;
   // console.log(order)
   // console.log("OC:",props);
+  const grillName = (order.grill && order.grill.name) || order.name;
+  const grillPrice= (order.grill && order.grill.price) || order.price;
   return (
     <Card className={classes.root} square>
-      {order &&
-      <CardContent>
-        {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
+      {order && (
+        <CardContent>
+          {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
           Order Id: {order.id}
         </Typography> */}
-        <Typography variant="h6" component="h2">
-          {order.name}
-        </Typography>
-        <br></br>
-        <Typography color="textSecondary">Booking Info: {order.id}</Typography>
-        <Typography color="textSecondary">From Date:</Typography>
-        {/* {order.fromDate} {order.fromTime} */}
-        <Typography color="textSecondary">
-          ToDate:
-          {/* {order.toDate} {order.toTime} */}
-        </Typography>
-        <Typography color="textSecondary">
-          Total amount paid: ${order.price}
-        </Typography>
-      </CardContent>}
+          <Typography variant="h6" component="h2">
+            {grillName}
+          </Typography>
+          <br></br>
+          <Typography color="textSecondary">
+            Booking Info: {order.id}
+          </Typography>
+          <Typography color="textSecondary">
+            From Date: {order.fromDate} {order.fromTime}
+          </Typography>
+          <Typography color="textSecondary">
+            ToDate: {order.toDate} {order.toTime}
+          </Typography>
+          <Typography color="textSecondary">
+            Total amount paid: $ {grillPrice }
+          </Typography>
+        </CardContent>
+      )}
     </Card>
   );
 }

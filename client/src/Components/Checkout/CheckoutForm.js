@@ -17,6 +17,8 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import { Link } from "react-router-dom";
+import { addReservation } from "../Queries/queries";
+import { useMutation } from "@apollo/react-hooks";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,11 +82,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CheckoutForm(props) {
   const classes = useStyles();
-
+  const {itemsInCart, auth} = props;
+  console.log(props);
   const initialFormData = {};
 
   const [formData, updateFormData] = React.useState(initialFormData);
   const [orderPlaced, setOrderPlaced] = React.useState(false);
+  const [addReservationToMongo] = useMutation(addReservation);
 
   const handleChange = (e) => {
     updateFormData({
@@ -96,6 +100,20 @@ export default function CheckoutForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("checkout JSON", formData);
+    itemsInCart.forEach(async (item) => {
+      var response = await addReservationToMongo({
+        variables: {
+          userId: auth,
+          grillId: item.id,
+          fromDate: item.fromDate,
+          toDate: item.toDate,
+          fromTime: item.fromTime,
+          toTime: item.toTime,
+          totalAmount: item.price.toString(),
+        },
+      });
+      console.log(response);
+    });
     setOrderPlaced(true);
     // props.handleLogin(formData);
   };

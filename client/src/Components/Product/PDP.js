@@ -49,12 +49,16 @@ const styles = {
   }
 };
 
+const date = new Date().toISOString().split("T")[0];
+
 class PDP extends Component {
   constructor() {
     super();
     this.state = {
       status: "",
       currentGrill: null,
+      dateTime: null,
+      error: null,
     };
   }
   componentDidMount() {
@@ -70,16 +74,15 @@ class PDP extends Component {
     // Typical usage (don't forget to compare props):
     if (this.props.status !== prevProps.status) {
       // this.fetchData(this.props.userID);
-      this.setState({status: this.props.status})
+      this.setState({ status: this.props.status });
     }
   }
 
   handleCart = (data, whatToDo) => {
-    console.log(data);
-
     //check if dates are correctly filled
     switch (whatToDo) {
       case "add":
+        console.log("DATA_", data);
         this.props.addToCart(data);
         this.setState({ status: "ADDED" });
         break;
@@ -92,12 +95,40 @@ class PDP extends Component {
     }
   };
 
-  handleDates = (toFromDates) => {
-    console.log("PDP DATES:", toFromDates);
+  validateInputs = (formData) => {
+    if (
+      formData.fromDate === formData.toDate &&
+      formData.fromTime === formData.toTime
+    ) {
+      this.setState({ error: "Date/Time values incorrect!" });
+      return false;
+    } else if (
+      formData.fromDate < date ||
+      formData.toDate < date ||
+      formData.fromDate > formData.toDate
+    ) {
+      this.setState({
+        error: "Please check selected date ! Date cannot be older than today!",
+      });
+      return false;
+    } else {
+      this.setState({ error: null });
+      return true;
+    }
+  };
+
+  handleDates = (datesInfo) => {
+    console.log("DATES _:",datesInfo)
+    this.validateInputs(datesInfo);
+    this.setState({ dateTime: datesInfo });
   };
   render() {
     // console.log("PDP Props: ", this.props);
     let currentGrill = this.props.grill || {};
+    let reservationData = {
+      ...currentGrill,
+      ...this.state.dateTime,
+    };
     const grillImg =
       "https://cdn.shopify.com/s/files/1/1205/3574/products/gas-bbq-grill-rentuu-1479788757021_320x.jpg?v=1534508821";
     return (
@@ -166,7 +197,7 @@ class PDP extends Component {
                     variant="outlined"
                     color="secondary"
                     style={styles.buttons}
-                    onClick={() => this.handleCart(currentGrill, "add")}
+                    onClick={() => this.handleCart(reservationData, "add")}
                   >
                     Add to Cart
                   </Button>
@@ -176,7 +207,7 @@ class PDP extends Component {
                       variant="outlined"
                       color="secondary"
                       style={styles.buttons}
-                      onClick={() => this.handleCart(currentGrill, "remove")}
+                      onClick={() => this.handleCart(reservationData, "remove")}
                     >
                       Remove from Cart
                     </Button>
