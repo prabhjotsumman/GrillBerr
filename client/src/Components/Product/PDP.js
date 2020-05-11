@@ -82,7 +82,6 @@ class PDP extends Component {
     //check if dates are correctly filled
     switch (whatToDo) {
       case "add":
-        console.log("DATA_", data);
         this.props.addToCart(data);
         this.setState({ status: "ADDED" });
         break;
@@ -118,7 +117,6 @@ class PDP extends Component {
   };
 
   handleDates = (datesInfo) => {
-    console.log("DATES _:",datesInfo)
     this.validateInputs(datesInfo);
     this.setState({ dateTime: datesInfo });
   };
@@ -137,7 +135,8 @@ class PDP extends Component {
           flexGrow: 1,
           padding: "0px",
           overflow: "hidden",
-          height: "81vh",
+          // maxHeight: "85vh",
+          // overflow: 'scroll'
         }}
       >
         <Grid

@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CheckoutForm(props) {
   const classes = useStyles();
   const {itemsInCart, auth} = props;
-  console.log(props);
+  // console.log(props);
   const initialFormData = {};
 
   const [formData, updateFormData] = React.useState(initialFormData);
@@ -101,7 +101,7 @@ export default function CheckoutForm(props) {
     e.preventDefault();
     console.log("checkout JSON", formData);
     itemsInCart.forEach(async (item) => {
-      var response = await addReservationToMongo({
+      const response = await addReservationToMongo({
         variables: {
           userId: auth,
           grillId: item.id,
@@ -112,7 +112,7 @@ export default function CheckoutForm(props) {
           totalAmount: item.price.toString(),
         },
       });
-      console.log(response);
+      // console.log(response);
     });
     setOrderPlaced(true);
     // props.handleLogin(formData);

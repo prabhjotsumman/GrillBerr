@@ -8,7 +8,7 @@ import {
 
 export const signIn = (credentials) => {
   return (dispatch, getState,  getFirebase ) => {
-    console.log(credentials);
+    // console.log(credentials);
     const firebase = getFirebase();
 
     firebase

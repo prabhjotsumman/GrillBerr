@@ -18,12 +18,12 @@ class AuthInterface extends Component {
   };
 
   handleSignUp = (newUser) => {
-    console.log("INF :", newUser);
+    // console.log("INF :", newUser);
     this.props.signUp(newUser);
   };
   render() {
     // const { authError } = this.props;
-    console.log("AUTH_I : ", this.props);
+    // console.log("AUTH_I : ", this.props);
     return this.props.isLoggedIn ? (
       <Redirect to="/" />
     ) : this.props.mode === "signin" ? (
@@ -34,7 +34,7 @@ class AuthInterface extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log(state);
+  // console.log(state);
   return {
     authError: state.auth.authError,
     isLoggedIn :  state.firebase.auth.uid
